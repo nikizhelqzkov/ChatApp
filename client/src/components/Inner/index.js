@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Login from "../Login";
 import Messenger from "../Messenger";
 import { Wrapper } from "./Inner.Styles";
+import { AccountContext } from "../../context/AccountProvider";
 
 const Inner = () => {
-  const [logged, isLogged] = useState(false);
+  const { account, setAccount} = useContext(AccountContext);
   return (
     <Wrapper className="massengerOuter">
-      {logged ? <Messenger /> : <Login />}
+      {account ? <Messenger /> : <Login />}
     </Wrapper>
   );
 };
