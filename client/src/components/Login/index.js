@@ -25,6 +25,7 @@ const Login = () => {
         buttonText={"Login to the app"}
         onFailure={onLoginFailure}
         onSuccess={onLoginSuccessful}
+        // isSignedIn={true}
       />
     </LoginContainer>
   );
