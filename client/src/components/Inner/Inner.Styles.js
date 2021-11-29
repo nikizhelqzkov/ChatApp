@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    -webkit-box-shadow: 5px 5px 15px 5px #000000;
-    box-shadow: 0px 5px 15px 2px #000000;
+    -webkit-box-shadow: 5px 5px 15px 5px #3d3c3d;
+    box-shadow: 0px 5px 15px 2px #3d3c3d;
   }
 `;
