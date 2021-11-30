@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  -webkit-box-shadow: 0px 0px 5px 1px #3d3c3d;
+    box-shadow: 0px 0px 5px 1px #3d3c3d;
   & > * {
     margin-right: 10px;
     padding: 2px 5px;
