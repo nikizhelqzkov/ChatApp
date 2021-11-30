@@ -1,7 +1,7 @@
 import React from 'react'
-import Conversations from './conversations'
-import Header from './header'
-import Search from './search'
+import Conversations from './conversations/Conversations'
+import Header from './header/Header'
+import Search from './search/Search'
 
 const Menu = () => {
     return (

@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Inner from "./components/Inner/index";
+import Inner from "./components/Inner/Inner";
 import AccountProvider from "./context/AccountProvider";
 
 function App() {

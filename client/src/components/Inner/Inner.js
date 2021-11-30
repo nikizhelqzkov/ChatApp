@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import Login from "../Login";
-import Messenger from "../Messenger";
+import Login from "../Login/Login";
+import Messenger from "../Messenger/Messenger";
 import { Wrapper } from "./Inner.Styles";
 import { AccountContext } from "../../context/AccountProvider";
 
