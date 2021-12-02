@@ -19,5 +19,6 @@ export const Wrapper = styled.div`
 
   .menuMore {
     margin-left: auto;
+    cursor: pointer;
   }
 `;
