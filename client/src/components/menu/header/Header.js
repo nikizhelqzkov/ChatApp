@@ -1,20 +1,22 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "../../../context/AccountProvider";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { Wrapper } from "./Header.Styles";
 import { Menu, MenuItem, makeStyles } from "@material-ui/core";
 import { GoogleLogout } from "react-google-login";
 import { clientID } from "../../data/googleApi";
+import { Wrapper } from "./Header.Styles";
+import InfoDrawer from "../../drawer/InfoDrawer";
+
 const useStyle = makeStyles({
   menuItem: {
     fontSize: 14,
-    backgroundColor:'#fff !important',
+    backgroundColor: "#fff !important",
     "& > *": {
       textAlign: "center",
       width: "100%",
     },
-    "&:hover":{
-      backgroundColor:' #e1dad8  !important'
+    "&:hover": {
+      backgroundColor: " #e1dad8  !important",
     },
   },
   logout: {
@@ -23,12 +25,16 @@ const useStyle = makeStyles({
   },
 });
 
-const Header = () => {
+const Header = ({ drawerOpen, setDrawerOpen }) => {
   const classes = useStyle();
   const { account, setAccount } = useContext(AccountContext);
   const [open, setOpen] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const handleClose = () => {
     setOpen(false);
+  };
+  const toggleDrawer = () => {
+    setDrawerOpen(true);
   };
   const handleClick = (event) => {
     setOpen(event.currentTarget);
@@ -41,10 +47,19 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <img src={account.imageUrl} alt="profile logo" className="profileLogo" />
+      <img
+        src={account.imageUrl}
+        alt="profile logo"
+        className="profileLogo"
+        onClick={toggleDrawer}
+      />
       <h2>Chats</h2>
-      <MoreHorizIcon className="menuMore" onClick={handleClick}  aria-controls="fade-menu"
-        aria-haspopup="true"/>
+      <MoreHorizIcon
+        className="menuMore"
+        onClick={handleClick}
+        aria-controls="fade-menu"
+        aria-haspopup="true"
+      />
       <Menu
         id="accountMenu"
         aria-labelledby="accountMenu"
@@ -61,7 +76,13 @@ const Header = () => {
           horizontal: "left",
         }}
       >
-        <MenuItem className={classes.menuItem} onClick={handleClose}>
+        <MenuItem
+          className={classes.menuItem}
+          onClick={() => {
+            handleClose();
+            toggleDrawer();
+          }}
+        >
           <span>Profile</span>
         </MenuItem>
         <MenuItem onClick={handleClose}>
@@ -73,6 +94,7 @@ const Header = () => {
           />
         </MenuItem>
       </Menu>
+      <InfoDrawer open={openDrawer} setOpen={setOpenDrawer} />
     </Wrapper>
   );
 };

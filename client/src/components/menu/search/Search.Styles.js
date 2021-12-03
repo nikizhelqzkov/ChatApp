@@ -14,12 +14,16 @@ export const SearchBox = styled.div`
     display: flex;
     align-items: center;
     min-height: 23px;
+    & > * {
+      cursor: pointer;
+    }
     & > input {
       border: 0;
       outline: none;
       font-size: 14px;
       margin-left: 5px;
-      cursor: pointer;
+      cursor: text;
+      width: 100%;
     }
   }
 `;
