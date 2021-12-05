@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
     border-radius: 50%;
     padding: 10px;
     margin-right: 0;
+    cursor: pointer;
   }
   .MuiMenuItem-root {
     text-align: center !important;
