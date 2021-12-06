@@ -27,7 +27,6 @@ export const DrawerMain = styled.div`
       }
       p {
         margin: 10px 0;
-        font-size: px;
         color: #4a4a4a;
       }
     }
