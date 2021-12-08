@@ -3,13 +3,15 @@ import { LoginContainer } from "./Login.Styles";
 import { GoogleLogin } from "react-google-login";
 import { AccountContext } from "../../context/AccountProvider";
 import { clientID } from "../data/googleApi";
+import { addUser } from "../../service/api";
 
 const Login = () => {
   const { account, setAccount } = useContext(AccountContext);
-  const onLoginSuccessful = ({ profileObj }) => {
+  const onLoginSuccessful = async ({ profileObj }) => {
     console.log("Login successfully", profileObj);
     console.log(typeof setAccount);
     setAccount(profileObj);
+    await addUser(profileObj);
   };
 
   const onLoginFailure = () => {
