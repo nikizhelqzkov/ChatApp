@@ -6,11 +6,12 @@ import InfoDrawer from "../drawer/InfoDrawer";
 
 const Menu = () => {
   const [open, setOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
   return (
     <>
       <Header drawerOpen={open} setDrawerOpen={setOpen} />
-      <Search />
-      <Conversations />
+      <Search setSearchText={setSearchText}/>
+      <Conversations text={searchText} />
       <InfoDrawer open={open} setOpen={setOpen} />
     </>
   );
