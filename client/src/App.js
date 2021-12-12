@@ -3,7 +3,8 @@ import "./App.css";
 // import Inner from "./components/Inner/Inner";
 import AccountProvider from "./context/AccountProvider";
 import TemplateProvider from "./templates/TemplateProvider";
-import Loader from "./components/loader/Loader"; 
+import Loader from "./components/loader/Loader";
+import UserProvider from "./context/UserProvider";
 
 const Inner = lazy(() => import("./components/Inner/Inner"));
 
@@ -11,11 +12,13 @@ function App() {
   return (
     <div className="app">
       <TemplateProvider>
-        <AccountProvider>
-          <Suspense fallback={<Loader />}>
-            <Inner />
-          </Suspense>
-        </AccountProvider>
+        <UserProvider>
+          <AccountProvider>
+            <Suspense fallback={<Loader />}>
+              <Inner />
+            </Suspense>
+          </AccountProvider>
+        </UserProvider>
       </TemplateProvider>
     </div>
   );

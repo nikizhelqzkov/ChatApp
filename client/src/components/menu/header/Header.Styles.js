@@ -11,11 +11,12 @@ export const Wrapper = styled.div`
     text-align: center;
   }
   .profileLogo {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    padding: 10px;
+    padding: 5px;
     margin-right: 0;
+    margin-left: 5px;
     cursor: pointer;
   }
   .MuiMenuItem-root {

@@ -13,7 +13,7 @@ export const MessengerContainer = styled.div`
   }
   .Messenger__rightContainer {
     width: 70%;
-    background: #2fd;
+    background: #dfd;
     border: 1px solid #000;
   }
 `;
