@@ -19,10 +19,6 @@ export const Wrapper = styled.div`
     margin-left: 5px;
     cursor: pointer;
   }
-  .MuiMenuItem-root {
-    text-align: center !important;
-    background: red !important;
-  }
   .menuMore {
     margin-left: auto;
     cursor: pointer;

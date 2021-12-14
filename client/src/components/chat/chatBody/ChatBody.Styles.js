@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  background-color: #fff;
-  height: 65vh;
+  background-color: #f4f4f4;
+  height: 68vh;
   overflow-y: auto;
 `;

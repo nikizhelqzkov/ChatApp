@@ -5,7 +5,8 @@ export const Wrapper = styled.div`
   align-items: center;
   -webkit-box-shadow: 0px 0px 5px 1px #3d3c3d;
   box-shadow: 0px 0px 5px 1px #3d3c3d;
-  padding: 10px;
+  padding: 11px;
+  margin-bottom: 5px;
   img {
     width: 40px;
     height: 40px;
