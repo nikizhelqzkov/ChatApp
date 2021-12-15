@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Container, MessageBox } from "./ChatFooter.Styles";
 import { SentimentSatisfiedAltRounded } from "@material-ui/icons";
 import { AddAPhotoOutlined } from "@material-ui/icons";
@@ -18,12 +18,12 @@ const ChatFooter = () => {
     setMessage((prev) => prev + emojiObject.emoji);
   };
 
-  const handleKeyDown= (e) => {
-    if (e.key === 'Enter') {
-      console.log('do validate'); 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      console.log("do validate");
       //submitHandler(); + clear message
     }
-  }
+  };
 
   return (
     <Container>

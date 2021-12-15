@@ -10,8 +10,8 @@ const Conversation = ({ user }) => {
   const setUser = async () => {
     setPerson(user);
     await setConversation({
-      senderId: account.googleId,
-      receiverId: user.googleId,
+      sender: account.googleId,
+      receiver: user.googleId,
     });
   };
 
