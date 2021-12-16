@@ -34,3 +34,12 @@ export const getConversation = async (data) => {
     console.error("Error with the calling getConversation API", error);
   }
 };
+
+export const newMessage = async (data) => {
+  try {
+    const response = await axios.post(`${baseUrl}/message/add`, data);
+    return response.data;
+  } catch (error) {
+    console.error(`Error with new message in the Api. Error: ${error}`);
+  }
+};

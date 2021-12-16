@@ -9,6 +9,7 @@ import { getConversation } from "../../service/api";
 const Chat = () => {
   const [conversation, setConversation] = useState({});
   // const [messages, setMessages] = useState([]); TODO: implement messages
+  const [message, setMessage] = useState("");
   const { account } = useContext(AccountContext);
   const { person } = useContext(UserContext);
   useEffect(() => {
@@ -20,13 +21,14 @@ const Chat = () => {
       setConversation(data);
     };
     fetchConversation();
+    setMessage("");
   }, [person.googleId]);
 
   return (
     <>
       <ChatHeader />
       <ChatBody />
-      <ChatFooter />
+      <ChatFooter conversation={conversation} message={message} setMessage={setMessage}/>
     </>
   );
 };

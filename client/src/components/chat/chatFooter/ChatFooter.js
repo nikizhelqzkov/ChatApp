@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, MessageBox } from "./ChatFooter.Styles";
 import { SentimentSatisfiedAltRounded } from "@material-ui/icons";
 import { AddAPhotoOutlined } from "@material-ui/icons";
 import { SendRounded } from "@material-ui/icons";
 import Picker from "emoji-picker-react";
+import { AccountContext } from "../../../context/AccountProvider";
+import { newMessage } from "../../../service/api";
 
-const ChatFooter = () => {
+const ChatFooter = ({ conversation, message, setMessage }) => {
   const [emojiOpen, setEmojiOpen] = useState(false);
-  const [message, setMessage] = useState("");
 
+  const { account } = useContext(AccountContext);
   const emojiHandler = () => {
     setEmojiOpen((prev) => !prev);
   };
@@ -18,13 +20,24 @@ const ChatFooter = () => {
     setMessage((prev) => prev + emojiObject.emoji);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
       console.log("do validate");
-      //submitHandler(); + clear message
+      await sendText();
     }
   };
-
+  const sendText = async () => {
+    if (!message) {
+      return;
+    }
+    const messageData = {
+      conversationId: conversation._id,
+      sender: account.googleId,
+      text: message,
+    };
+    await newMessage(messageData);
+    setMessage("");
+  };
   return (
     <Container>
       <SentimentSatisfiedAltRounded
@@ -50,6 +63,7 @@ const ChatFooter = () => {
         className="chatIcons"
         fontSize="medium"
         id="sendChatMessage"
+        onClick={sendText}
       />
     </Container>
   );
