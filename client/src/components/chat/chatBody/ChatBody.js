@@ -1,12 +1,18 @@
-import React from 'react'
-import { Wrapper } from './ChatBody.Styles'
+import React, { useState, useEffect } from "react";
+import { getMessages } from "../../../service/api";
+import { Wrapper } from "./ChatBody.Styles";
 
-const ChatBody = () => {
-    return (
-        <Wrapper>
-           Body 
-        </Wrapper>
-    )
-}
+const ChatBody = ({ conversation }) => {
+  const [messages, setMessages] = useState([]);
 
-export default ChatBody
+  useEffect(() => {
+    const fetchMessages = async (id) => {
+      const data = await getMessages(id);
+      setMessages(data);
+    };
+    fetchMessages(conversation._id);
+  }, [conversation?._id]);
+  return <Wrapper>Body</Wrapper>;
+};
+
+export default ChatBody;

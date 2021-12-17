@@ -9,3 +9,12 @@ export const newMessage = async (req, res) => {
     res.status(500).json(`Error with adding message. Error: ${error}`);
   }
 };
+
+export const getMessages = async (req, res) => {
+  try {
+    const messages = await Message.find({ conversationId: req.params.id });
+    res.status(200).json(messages);
+  } catch (error) {
+    res.status(500).json(`Error with getting messages. Error: ${error}`);
+  }
+};

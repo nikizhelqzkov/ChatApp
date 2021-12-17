@@ -8,7 +8,6 @@ import { getConversation } from "../../service/api";
 
 const Chat = () => {
   const [conversation, setConversation] = useState({});
-  // const [messages, setMessages] = useState([]); TODO: implement messages
   const [message, setMessage] = useState("");
   const { account } = useContext(AccountContext);
   const { person } = useContext(UserContext);
@@ -27,8 +26,12 @@ const Chat = () => {
   return (
     <>
       <ChatHeader />
-      <ChatBody />
-      <ChatFooter conversation={conversation} message={message} setMessage={setMessage}/>
+      <ChatBody conversation={conversation} />
+      <ChatFooter
+        conversation={conversation}
+        message={message}
+        setMessage={setMessage}
+      />
     </>
   );
 };
