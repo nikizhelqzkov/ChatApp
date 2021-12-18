@@ -28,8 +28,8 @@ const Conversations = ({ text }) => {
     <Wrapper>
       {users.length !== 0 || isInit ? (
         users.map(
-          (user) =>
-            user.googleId !== account.googleId && <Conversation user={user} />
+          (user,index) =>
+            user.googleId !== account.googleId && <Conversation user={user} key={index} />
         )
       ) : (
         <h3>No users found</h3>
