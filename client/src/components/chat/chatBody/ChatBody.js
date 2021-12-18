@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getMessages } from "../../../service/api";
+import Message from "../message/Message";
 import { Wrapper } from "./ChatBody.Styles";
 
 const ChatBody = ({ conversation }) => {
@@ -12,7 +13,14 @@ const ChatBody = ({ conversation }) => {
     };
     fetchMessages(conversation._id);
   }, [conversation?._id]);
-  return <Wrapper>Body</Wrapper>;
+  return (
+    <Wrapper>
+      {messages &&
+        messages.map((message,index) => (
+          <Message key={index} message={message} />
+        ))}
+    </Wrapper>
+  );
 };
 
 export default ChatBody;
