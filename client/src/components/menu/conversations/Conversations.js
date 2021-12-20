@@ -6,7 +6,7 @@ import { Wrapper } from "./Conversations.Styles";
 
 const Conversations = ({ text }) => {
   const [users, setUsers] = useState([]);
-  const { account,socket } = useContext(AccountContext);
+  const { account, socket, setActiveUsers } = useContext(AccountContext);
   const [isInit, setInit] = useState(true);
 
   useEffect(() => {
@@ -23,16 +23,21 @@ const Conversations = ({ text }) => {
     };
     fetchUsers();
   }, [text]);
-  useEffect(() =>{
-    socket.current.emit('addUser',account.googleId);
-  },[account])
+  useEffect(() => {
+    socket.current.emit("addUser", account.googleId);
+    socket.current.on("getUsers", (users) => {
+      setActiveUsers(users);
+    });
+  }, [account]);
   return (
     // Testing data
     <Wrapper>
       {users.length !== 0 || isInit ? (
         users.map(
-          (user,index) =>
-            user.googleId !== account.googleId && <Conversation user={user} key={index} />
+          (user, index) =>
+            user.googleId !== account.googleId && (
+              <Conversation user={user} key={index} />
+            )
         )
       ) : (
         <h3>No users found</h3>
