@@ -6,7 +6,7 @@ import { Wrapper } from "./Conversations.Styles";
 
 const Conversations = ({ text }) => {
   const [users, setUsers] = useState([]);
-  const { account } = useContext(AccountContext);
+  const { account,socket } = useContext(AccountContext);
   const [isInit, setInit] = useState(true);
 
   useEffect(() => {
@@ -23,6 +23,9 @@ const Conversations = ({ text }) => {
     };
     fetchUsers();
   }, [text]);
+  useEffect(() =>{
+    socket.current.emit('addUser',account.googleId);
+  },[account])
   return (
     // Testing data
     <Wrapper>
