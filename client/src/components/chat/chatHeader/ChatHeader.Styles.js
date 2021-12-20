@@ -22,6 +22,9 @@ export const Headers = styled.div`
   h3 {
     font-size: 14px;
     font-weight: normal;
+    &.onlineUser{
+      color: #0dec4e;
+    }
   }
   h2,
   h3 {
