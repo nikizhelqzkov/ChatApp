@@ -10,7 +10,8 @@ import { newMessage } from "../../../service/api";
 const ChatFooter = ({ conversation, message, setMessage }) => {
   const [emojiOpen, setEmojiOpen] = useState(false);
 
-  const { account } = useContext(AccountContext);
+  const { account, socket, newMessageFlag, setNewMessageFlag } =
+    useContext(AccountContext);
   const emojiHandler = () => {
     setEmojiOpen((prev) => !prev);
   };
@@ -19,6 +20,9 @@ const ChatFooter = ({ conversation, message, setMessage }) => {
     emojiHandler();
     setMessage((prev) => prev + emojiObject.emoji);
   };
+  const receiverId = conversation?.members?.find(
+    (member) => member !== account.googleId
+  );
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
@@ -35,8 +39,14 @@ const ChatFooter = ({ conversation, message, setMessage }) => {
       sender: account.googleId,
       text: message,
     };
+    socket.current.emit("sendMessage", {
+      senderId: account.googleId,
+      receiverId,
+      text: message,
+    });
     await newMessage(messageData);
     setMessage("");
+    setNewMessageFlag((prev) => !prev);
   };
   return (
     <Container>

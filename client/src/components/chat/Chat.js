@@ -26,7 +26,7 @@ const Chat = () => {
   return (
     <>
       <ChatHeader />
-      <ChatBody conversation={conversation} />
+      <ChatBody conversation={conversation} person={person} />
       <ChatFooter
         conversation={conversation}
         message={message}

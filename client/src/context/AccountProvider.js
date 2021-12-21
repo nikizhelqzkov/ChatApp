@@ -5,10 +5,11 @@ export const AccountContext = createContext(null);
 const AccountProvider = ({ children }) => {
   const [account, setAccount] = useState();
   const [activeUsers, setActiveUsers] = useState([]);
+  const [newMessageFlag, setNewMessageFlag] = useState(false);
   const socket = useRef();
   useEffect(() => {
-    socket.current = io('ws://localhost:9000');
-  },[])
+    socket.current = io("ws://localhost:9000");
+  }, []);
   return (
     <AccountContext.Provider
       value={{
@@ -16,7 +17,9 @@ const AccountProvider = ({ children }) => {
         setAccount,
         socket,
         activeUsers,
-        setActiveUsers
+        setActiveUsers,
+        newMessageFlag,
+        setNewMessageFlag,
       }}
     >
       {children}
