@@ -7,8 +7,7 @@ import { AccountContext } from "../../../context/AccountProvider";
 const ChatBody = ({ conversation, person }) => {
   const [messages, setMessages] = useState([]);
   const [incommingMessage, setIncommingMessage] = useState(null);
-  const { account, socket, newMessageFlag, setNewMessageFlag } =
-    useContext(AccountContext);
+  const { socket, newMessageFlag } = useContext(AccountContext);
   const scrollRef = useRef();
 
   useEffect(() => {
@@ -17,7 +16,7 @@ const ChatBody = ({ conversation, person }) => {
       setMessages(data);
     };
     fetchMessages(conversation._id);
-  }, [conversation?._id, person._id]);
+  }, [conversation?._id, person._id, newMessageFlag]);
 
   useEffect(() => {
     socket.current.on("getMessage", ({ senderId, text }) => {
@@ -28,21 +27,24 @@ const ChatBody = ({ conversation, person }) => {
   useEffect(() => {
     if (
       incommingMessage &&
-      conversation?.members?.include(incommingMessage.sender)
+      conversation?.members?.includes(incommingMessage.sender)
     ) {
       setMessages((prev) => [...prev, incommingMessage]);
     }
   }, [incommingMessage, conversation]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ transition: "smooth" });
-  }, [messages]);
+    scrollRef.current?.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest" });
+  }, [messages,scrollRef]);
 
   return (
-    <Wrapper>
+    <Wrapper >
       {messages &&
         messages.map((message, index) => (
-          <Message key={index} message={message} ref={scrollRef} />
+          <div ref={scrollRef}>
+
+          <Message key={index} message={message}  />
+          </div>
         ))}
     </Wrapper>
   );
