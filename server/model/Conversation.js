@@ -4,7 +4,10 @@ const conversationSchema = new mongoose.Schema(
   {
     members: {
       type: Array,
-    },//will have message key in future
+    },
+    message: {
+      type: String,
+    }
   },
   {
     timestamps: true,
