@@ -16,6 +16,7 @@ app.listen(PORT, () => {
 });
 
 app.use(bodyParser.json({ extended: true }));
+// app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/', router);
