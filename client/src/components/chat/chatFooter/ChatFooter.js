@@ -10,8 +10,7 @@ import { newMessage } from "../../../service/api";
 const ChatFooter = ({ conversation, message, setMessage }) => {
   const [emojiOpen, setEmojiOpen] = useState(false);
 
-  const { account, socket, newMessageFlag, setNewMessageFlag } =
-    useContext(AccountContext);
+  const { account, socket, setNewMessageFlag } = useContext(AccountContext);
   const emojiHandler = () => {
     setEmojiOpen((prev) => !prev);
   };
@@ -26,7 +25,6 @@ const ChatFooter = ({ conversation, message, setMessage }) => {
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      console.log("do validate");
       await sendText();
     }
   };

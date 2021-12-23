@@ -22,7 +22,7 @@ const ChatBody = ({ conversation, person }) => {
     socket.current.on("getMessage", ({ senderId, text }) => {
       setIncommingMessage({ sender: senderId, text, createdAt: Date.now() });
     });
-  }, []);//messages
+  }, []);
 
   useEffect(() => {
     if (
@@ -42,7 +42,6 @@ const ChatBody = ({ conversation, person }) => {
       {messages &&
         messages.map((message, index) => (
           <div ref={scrollRef}>
-
           <Message key={index} message={message}  />
           </div>
         ))}
