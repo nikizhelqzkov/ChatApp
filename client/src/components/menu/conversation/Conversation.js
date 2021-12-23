@@ -18,7 +18,7 @@ const Conversation = ({ user }) => {
       setMessage({ text: data.message, timestamp: data.updatedAt });
     };
     getConversationMessage();
-  }, [newMessageFlag]);
+  }, [newMessageFlag]);//with message works but memoryLeak
 
   const setUser = async () => {
     setPerson(user);
