@@ -34,15 +34,15 @@ const ChatBody = ({ conversation, person }) => {
   }, [incommingMessage, conversation]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({behavior: "smooth"});
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
-    <Wrapper >
+    <Wrapper>
       {messages &&
         messages.map((message, index) => (
-          <div ref={scrollRef}>
-          <Message key={index} message={message}  />
+          <div ref={scrollRef} key={index}>
+            <Message message={message} />
           </div>
         ))}
     </Wrapper>
