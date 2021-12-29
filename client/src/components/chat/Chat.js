@@ -9,6 +9,7 @@ import { getConversation } from "../../service/api";
 const Chat = () => {
   const [conversation, setConversation] = useState({});
   const [message, setMessage] = useState("");
+  const [photo, setPhoto] = useState("");
   const { account } = useContext(AccountContext);
   const { person } = useContext(UserContext);
   useEffect(() => {
@@ -31,6 +32,8 @@ const Chat = () => {
         conversation={conversation}
         message={message}
         setMessage={setMessage}
+        photo={photo}
+        setPhoto={setPhoto}
       />
     </>
   );

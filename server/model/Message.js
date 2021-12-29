@@ -12,7 +12,9 @@ export const MessageSchema = new mongoose.Schema(
     },
     text: {
       type: "string",
-      required: true,
+    },
+    photo: {
+      type: "string",
     },
   },
   {
@@ -20,5 +22,5 @@ export const MessageSchema = new mongoose.Schema(
   }
 );
 
-const Message = mongoose.model('Message', MessageSchema);
+const Message = mongoose.model("Message", MessageSchema);
 export default Message;
