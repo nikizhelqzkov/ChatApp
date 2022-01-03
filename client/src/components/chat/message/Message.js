@@ -22,7 +22,20 @@ const Message = ({ message }) => {
   const getInfo = () => {
     return (
       <>
-        <h3>{message.text}</h3>
+        {message.text !== "" ? (
+          <h3>{message.text}</h3>
+        ) : (
+          <a href={`http://localhost:8080/images/${message.photo}`} target="_blank" rel="noreferrer">
+            <img
+              src={`http://localhost:8080/images/${message.photo}`}
+              alt="msgImg"
+              width="200"
+              height="150"
+              target="_blank"
+            />
+          </a>
+        )}
+
         <h4>
           {formatDate(new Date(message.createdAt).getHours())}:
           {formatDate(new Date(message.createdAt).getMinutes())}
@@ -33,9 +46,7 @@ const Message = ({ message }) => {
   const comp = () => {
     return account.googleId === message.sender;
   };
-  return (
-    <>{getMessageInfo(getInfo(), comp())}</>
-  );
+  return <>{getMessageInfo(getInfo(), comp())}</>;
 };
 
 export default Message;

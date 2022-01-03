@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { Container, MessageBox } from "./ChatFooter.Styles";
 import { SentimentSatisfiedAltRounded } from "@material-ui/icons";
 import { AddAPhotoOutlined } from "@material-ui/icons";
+import { ImageSearchOutlined } from "@material-ui/icons";
 import { SendRounded } from "@material-ui/icons";
 import Picker from "emoji-picker-react";
 import { AccountContext } from "../../../context/AccountProvider";
-import { newMessage } from "../../../service/api";
+import { newMessage, newPhoto } from "../../../service/api";
 
 const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
   const [emojiOpen, setEmojiOpen] = useState(false);
@@ -28,38 +29,44 @@ const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
       await sendText();
     }
   };
-  
-  const sendText = async (e) => {
+
+  const sendPhoto = async (e) => {
     e.preventDefault();
-    if (!message && !photo) {
+    if (!photo) {
+      return;
+    }
+    const formData = new FormData();
+    formData.append("conversationId", conversation._id);
+    formData.append("sender", account.googleId);
+    formData.append("photo", photo);
+    await newPhoto(formData);
+    setPhoto("");
+    setNewMessageFlag((prev) => !prev);
+  };
+
+  const sendText = async () => {
+    if (!message) {
       return;
     }
     const messageData = {
       conversationId: conversation._id,
       sender: account.googleId,
       text: message,
-      photo,
     };
-    const formData = new FormData();
-    formData.append("conversationId", conversation._id);
-    formData.append("sender", account.googleId);
-    formData.append("text", message);
-    formData.append("photo", photo);
 
     socket.current.emit("sendMessage", {
       senderId: account.googleId,
       receiverId,
       text: message,
-      photo,
     });
-    await newMessage(formData);
+    await newMessage(messageData);
     setMessage("");
     setPhoto("");
     setNewMessageFlag((prev) => !prev);
   };
   return (
     <Container>
-      <form onSubmit={sendText} encType="multipart/form-data">
+      <form encType="multipart/form-data" onSubmit={sendPhoto}>
         <SentimentSatisfiedAltRounded
           className="chatIcons"
           fontSize="medium"
@@ -74,6 +81,9 @@ const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
         <label htmlFor="photoUploader">
           <AddAPhotoOutlined className="chatIcons" fontSize="medium" />
         </label>
+        <label htmlFor="sendPhoto">
+          <ImageSearchOutlined className="chatIcons" fontSize="medium" />
+        </label>
         <input
           type="file"
           id="photoUploader"
@@ -84,23 +94,22 @@ const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
           accept="image/.png, image/.jpg, image/.jpeg"
           style={{ display: "none" }}
         />
-        <MessageBox
-          type="text"
-          placeholder="Write a message"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-          // onKeyDown={handleKeyDown}
-        />
-        <label htmlFor="sendButton">
-          <SendRounded
-            className="chatIcons"
-            fontSize="medium"
-            id="sendChatMessage"
-            // onClick={sendText}
-          />
-        </label>
-        <input type="submit" id="sendButton" style={{ display: "none" }} />
+        <input type="submit" id="sendPhoto" style={{ display: "none" }} />
       </form>
+      <MessageBox
+        type="text"
+        placeholder="Write a message"
+        onChange={(e) => setMessage(e.target.value)}
+        value={message}
+        onKeyDown={handleKeyDown}
+      />
+
+      <SendRounded
+        className="chatIcons"
+        fontSize="medium"
+        id="sendChatMessage"
+        onClick={sendText}
+      />
     </Container>
   );
 };

@@ -5,7 +5,7 @@ export const newMessage = async (req, res) => {
     conversationId: req.body.conversationId,
     sender: req.body.sender,
     text: req.body.text,
-    photo: req.file.filename,
+    photo: "",
   });
   try {
     await newMessage.save();
@@ -15,6 +15,23 @@ export const newMessage = async (req, res) => {
     res.status(200).json("Message added successfully");
   } catch (error) {
     res.status(500).json(`Error with adding message. Error: ${error}`);
+  }
+};
+export const newPhoto = async (req, res) => {
+  const newMessage = new Message({
+    conversationId: req.body.conversationId,
+    sender: req.body.sender,
+    text: "",
+    photo: req.file.filename,
+  });
+  try {
+    await newMessage.save();
+    await Conversation.findByIdAndUpdate(req.body.conversationId, {
+      message: "📷",
+    });
+    res.status(200).json("Photo added successfully");
+  } catch (error) {
+    res.status(500).json(`Error with adding photo. Error: ${error}`);
   }
 };
 
