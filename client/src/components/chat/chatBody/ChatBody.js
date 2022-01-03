@@ -20,7 +20,12 @@ const ChatBody = ({ conversation, person }) => {
 
   useEffect(() => {
     socket.current.on("getMessage", ({ senderId, text }) => {
-      setIncommingMessage({ sender: senderId, text, createdAt: Date.now() });
+      setIncommingMessage({ sender: senderId, text,photo:"", createdAt: Date.now() });
+    });
+  }, []);
+  useEffect(() => {
+    socket.current.on("getPhoto", ({ senderId, photo }) => {
+      setIncommingMessage({ sender: senderId, text:"",photo, createdAt: Date.now() });
     });
   }, []);
 

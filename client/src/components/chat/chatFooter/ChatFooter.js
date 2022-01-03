@@ -7,6 +7,7 @@ import { SendRounded } from "@material-ui/icons";
 import Picker from "emoji-picker-react";
 import { AccountContext } from "../../../context/AccountProvider";
 import { newMessage, newPhoto } from "../../../service/api";
+import path from "path";
 
 const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
   const [emojiOpen, setEmojiOpen] = useState(false);
@@ -35,10 +36,22 @@ const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
     if (!photo) {
       return;
     }
+
+    const modifiedPhoto = new File(
+      [photo],
+      Date.now() + path.extname(photo.name),
+      { type: photo.type }
+    );
+    console.log(modifiedPhoto);
     const formData = new FormData();
     formData.append("conversationId", conversation._id);
     formData.append("sender", account.googleId);
-    formData.append("photo", photo);
+    formData.append("photo", modifiedPhoto);
+    socket.current.emit("sendPhoto", {
+      senderId: account.googleId,
+      receiverId,
+      photo: modifiedPhoto.name,
+    });
     await newPhoto(formData);
     setPhoto("");
     setNewMessageFlag((prev) => !prev);

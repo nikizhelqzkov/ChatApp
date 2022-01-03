@@ -1,5 +1,4 @@
 import { Server } from "socket.io";
-
 const PORT = process.env.PORT || 9000;
 
 const io = new Server(PORT, {
@@ -34,6 +33,17 @@ io.on("connection", (socket) => {
       io.to(receiver.socketId).emit("getMessage", {
         senderId,
         text,
+      });
+    }
+  });
+  //send photo
+  socket.on("sendPhoto", ({ senderId, receiverId, photo }) => {
+    const receiver = getUser(receiverId);
+    console.log(photo);
+    if (receiver) {
+      io.to(receiver.socketId).emit("getPhoto", {
+        senderId,
+        photo,
       });
     }
   });
