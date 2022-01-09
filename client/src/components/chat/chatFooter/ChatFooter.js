@@ -44,7 +44,6 @@ const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
       Date.now() + path.extname(photo.name),
       { type: photo.type }
     );
-    console.log(modifiedPhoto);
     const formData = new FormData();
     formData.append("conversationId", conversation._id);
     formData.append("sender", account.googleId);

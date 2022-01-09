@@ -8,13 +8,12 @@ import { addUser } from "../../service/api";
 const Login = () => {
   const {setAccount } = useContext(AccountContext);
   const onLoginSuccessful = async ({ profileObj }) => {
-    console.log("Login successfully", profileObj);
     setAccount(profileObj);
     await addUser(profileObj);
   };
 
   const onLoginFailure = () => {
-    console.log("Login Failed");
+   alert("Login Failed");
   };
   return (
     <LoginContainer>

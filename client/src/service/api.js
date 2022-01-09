@@ -6,7 +6,7 @@ export const addUser = async (user) => {
     const response = await axios.post(`${baseUrl}/addUser`, user);
     return response.data;
   } catch (error) {
-    console.log("Error while calling addUser API ", error);
+    console.error("Error while calling addUser API ", error);
   }
 };
 
@@ -15,7 +15,7 @@ export const getUsers = async () => {
     const response = await axios.get(`${baseUrl}/users`);
     return response.data;
   } catch (error) {
-    console.log("Error while getting users from API ", error);
+    console.error("Error while getting users from API ", error);
   }
 };
 export const setConversation = async (data) => {

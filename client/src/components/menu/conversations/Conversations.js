@@ -19,7 +19,6 @@ const Conversations = ({ text }) => {
         setInit(false);
       }
       setUsers(filteredUsers);
-      console.log(users);
     };
     fetchUsers();
   }, [text]);
