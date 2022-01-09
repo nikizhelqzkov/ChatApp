@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Container, MessageBox } from "./ChatFooter.Styles";
-import { SentimentSatisfiedAltRounded } from "@material-ui/icons";
-import { AddAPhotoOutlined } from "@material-ui/icons";
-import { ImageSearchOutlined } from "@material-ui/icons";
-import { SendRounded } from "@material-ui/icons";
+import { IosShare } from "@mui/icons-material";
+import {
+  SendRounded,
+  AddAPhotoOutlined,
+  SentimentSatisfiedAltRounded,
+} from "@material-ui/icons";
 import Picker from "emoji-picker-react";
 import { AccountContext } from "../../../context/AccountProvider";
 import { newMessage, newPhoto } from "../../../service/api";
@@ -95,7 +97,7 @@ const ChatFooter = ({ conversation, message, setMessage, photo, setPhoto }) => {
           <AddAPhotoOutlined className="chatIcons" fontSize="medium" />
         </label>
         <label htmlFor="sendPhoto">
-          <ImageSearchOutlined className="chatIcons" fontSize="medium" />
+          <IosShare className="chatIcons" fontSize="medium" />
         </label>
         <input
           type="file"
