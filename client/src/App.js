@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from "react";
 import "./App.css";
-// import Inner from "./components/Inner/Inner";
 import AccountProvider from "./context/AccountProvider";
 import TemplateProvider from "./templates/TemplateProvider";
 import Loader from "./components/loader/Loader";

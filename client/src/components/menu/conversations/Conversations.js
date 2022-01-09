@@ -29,7 +29,6 @@ const Conversations = ({ text }) => {
     });
   }, [account]);
   return (
-    // Testing data
     <Wrapper>
       {users.length !== 0 || isInit ? (
         users.map(

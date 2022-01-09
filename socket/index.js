@@ -52,5 +52,4 @@ io.on("connection", (socket) => {
     console.log("User disconnected");
     removeUser(socket.id);
   });
-  //todo: remove user when he hits logout button
 });
